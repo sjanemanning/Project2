@@ -30,22 +30,22 @@ def index():
 
 @app.route("/stateprofit")
 def stateprofit():
-    stateprofit = pd.read_sql('select "State",sum("Profit") as PROFIT from orders group by 1',engine)
-    stateprofit = stateprofit.to_dict()
+    stateprofit = pd.read_sql('select o."State",abbr."abbreviation", sum("Profit") as PROFIT from orders as o inner join (select distinct "state", "abbreviation" from state_names_and_abbreviations) abbr on o."State" = abbr."state" group by 1,2 order by "abbreviation"',engine)
+    stateprofit = stateprofit.to_dict(orient='list')
     return jsonify(stateprofit)
 
 
 @app.route("/shipprofit")
 def shipprofit():
-    shipprofit = pd.read_sql('select left(cast("Ship Date" as text),7) as SHIP_YYYY_MM, sum("Profit") as PROFIT from orders group by 1',engine)
-    shipprofit = shipprofit.to_dict()
+    shipprofit = pd.read_sql('select left(cast("Ship Date" as text),7) as SHIP_YYYY_MM, sum("Profit") as PROFIT from orders group by 1 order by left(cast("Ship Date" as text),7)',engine)
+    shipprofit = shipprofit.values.tolist()
     return jsonify(shipprofit)
 
 
 @app.route("/categoryprofit")
 def categoryprofit():
     categoryprofit = pd.read_sql('select "Sub-Category",sum("Profit") as PROFIT from orders group by 1',engine)
-    categoryprofit = categoryprofit.to_dict()
+    categoryprofit = categoryprofit.values.tolist()
     return jsonify(categoryprofit)
 
 if __name__ == "__main__":
