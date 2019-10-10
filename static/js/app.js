@@ -1,11 +1,6 @@
 
 
-var categoryurl = '/categoryprofit';
-d3.json(categoryurl).then(function(categorydata) {
-  console.log(categorydata)
-});
-
-
+// younes
 
 var svgWidth = 960;
 var svgHeight = 500;
@@ -109,4 +104,4 @@ Plotly.d3.json('/stateprofit', function (jsonData) {
   Plotly.plot("jeffs-map", data, layout, {
     showLink: false
   });
-})
+});

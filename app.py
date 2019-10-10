@@ -48,5 +48,26 @@ def categoryprofit():
     categoryprofit = categoryprofit.values.tolist()
     return jsonify(categoryprofit)
 
+
+@app.route("/rawdata")
+def rawdata():
+    return render_template("data.html")
+
+@app.route("/stategraph")
+def stategraph():
+    return render_template("stategraph.html")
+
+@app.route("/linegraph")
+def linegraph():
+    return render_template("linegraph.html")
+
+@app.route("/bargraph")
+def bargraph():
+    return render_template("bargraph.html")
+
+@app.route("/tableau")
+def tableau():
+    return render_template("tableau.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
