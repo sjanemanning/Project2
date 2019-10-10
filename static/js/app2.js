@@ -56,8 +56,27 @@ d3.json(categoryurl).then(function (categorydata) {
     .enter()
     .append("rect")
     .attr("class", "bar")
+    .attr('stroke', 'red')
+    .attr('opacity', 0.6)
     .attr("x", d => xBandScale(d[0]))
     .attr("y", d => yLinearScale(d[1]))
     .attr("width", xBandScale.bandwidth())
     .attr("height", d => chartHeight - yLinearScale(d[1]));
+
+    svg.append("text")
+    .attr("x", 20)
+    .attr("y", 240)
+    .style("text-anchor", "middle")
+    .text("Profit");
+    svg.append("text")
+    .attr("x", chartWidth / 1.60)
+    .attr("y", chartHeight + chartMargin.bottom)
+    .style("text-anchor", "middle")
+    .text("Products");
+  // Text title
+  svg.append("text")
+    .attr("x", chartWidth / 2)
+    .attr("y", 15)
+    .style("title", "middle")
+    .text("Bar Graph comparing profit and product");
 });
