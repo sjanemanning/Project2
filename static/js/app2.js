@@ -1,5 +1,5 @@
 // Define SVG area dimensions
-var svgWidth = 960;
+var svgWidth = 1100;
 var svgHeight = 500;
 
  // set the dimensions and margins of the graph
